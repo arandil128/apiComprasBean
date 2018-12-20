@@ -1,0 +1,15 @@
+{
+  "name": "api-xubio",
+  "version": "1.0.0",
+  "description": "Utilizacion de API XUbio para registrar facturas de compra",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arandil",
+  "license": "ISC",
+  "dependencies": {
+    "convert-csv-to-json": "0.0.13",
+    "request": "^2.88.0"
+  }
+}
