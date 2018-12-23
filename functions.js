@@ -51,8 +51,8 @@ function crearFactura(factura, fecha, monto, token) {
         if (error) {
             return console.dir(error);
         }
-        if (data.codeResponse == 200) {
-            console.log(`Factura: ${factura}  Fecha: ${fecha}  Monto: ${monto}  contabilizada  id: ${data}`);
+        if (data.transaccionid !== undefined) {
+            console.log(`Factura: ${factura}  Fecha: ${fecha}  Monto: ${monto}  contabilizada  id: ${data.transaccionid}`);
         } else {
             console.log(`Error en factura ${factura}, Descrip: ${data.description}`.red);
         }
