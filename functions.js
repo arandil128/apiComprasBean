@@ -1,0 +1,66 @@
+const request = require('request');
+var body = require('./modelos').body;
+const c = require('./Config');
+
+function getToken(callback) {
+
+    request.post({
+            url: c.urlToken,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            auth: {
+                user: c.clientId, //'1255745696904404546111506693671196629705384678674202752308076401147281141361545696125574931328990',
+                pass: c.secretId //'gjN9PIiYMhtr2H9XInD9Kl/=/*AFsVggqE8qIgfhLuwOrwVeW+kz4Ae/kVb/bfdUpZXXCz5K2T9lFBXSXyOzvLLZz1kJgtBCBB-XH=gjN9PIiYMhtr2H9XInD9Kl/=/*A'
+            },
+            form: {
+                'grant_type': 'client_credentials'
+            }
+        },
+        function(err, res) {
+            if (err) {
+                throw new error(err);
+            } else {
+                callback(res)
+            }
+        });
+}
+
+function crearFactura(factura, fecha, monto, token) {
+
+    let header = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
+    };
+    let url = 'https://xubio.com:443/API/1.1/comprobanteCompraBean';
+
+    body.numeroDocumento = factura;
+    body.fechaComprobante = fecha;
+    body.fecha = '2018-12-31';
+    body.fechaVto = fecha;
+    body.transaccionProductoItems[0].montoExtento = monto;
+
+
+    request.post({
+        "headers": header,
+        "url": url,
+        "body": JSON.stringify(body)
+    }, (error, response, data) => {
+        data = JSON.parse(data);
+        if (error) {
+            return console.dir(error);
+        }
+        if (data.codeResponse == 200) {
+            console.log(`Factura: ${factura}  Fecha: ${fecha}  Monto: ${monto}  contabilizada  id: ${data}`);
+        } else {
+            console.log(`Error en factura ${factura}, Descrip: ${data.description}`.red);
+        }
+    });
+}
+
+
+module.exports = {
+    getToken,
+    crearFactura
+}
