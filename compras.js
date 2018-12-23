@@ -18,7 +18,7 @@ const filecvs = './factprueba.json'; //fact.json
             console.log('Error al obtener el archivo ');
         };
         console.log(`Se obtuvo y parseo el archivo: ${filecvs}`);
-
+        // Posting documents
         for (let key in lista) {
             factura = lista[key].factura.substring(0, 16);
             console.log(`Registrando factura: ${factura} registro: ${key + 1}`);
