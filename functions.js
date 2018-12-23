@@ -10,8 +10,8 @@ function getToken(callback) {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             auth: {
-                user: c.clientId, //'1255745696904404546111506693671196629705384678674202752308076401147281141361545696125574931328990',
-                pass: c.secretId //'gjN9PIiYMhtr2H9XInD9Kl/=/*AFsVggqE8qIgfhLuwOrwVeW+kz4Ae/kVb/bfdUpZXXCz5K2T9lFBXSXyOzvLLZz1kJgtBCBB-XH=gjN9PIiYMhtr2H9XInD9Kl/=/*A'
+                user: c.clientId,
+                pass: c.secretId
             },
             form: {
                 'grant_type': 'client_credentials'
